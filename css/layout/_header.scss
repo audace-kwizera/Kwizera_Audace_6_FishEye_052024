@@ -1,0 +1,17 @@
+@import '../utils/functions';
+@import '../utils/mixins';
+@import '../utils/variables';
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    padding: 1rem;
+    h1 {
+        font-size: 36px;
+        font-weight: 100;
+        margin: 0 2.5rem;
+    }
+}

@@ -1,0 +1,16 @@
+@import "../utils/functions";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+
+/* ===================== Laptop ===================== */
+@include maxBigTablet__1199 {
+ 
+}
+
+/* ===================== Tablet ===================== */
+@include maxTablet__839 {
+
+}
+
+/* ===================== Tablet ===================== */

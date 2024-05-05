@@ -1,0 +1,252 @@
+@import "../utils/functions";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  z-index: 999;
+  .nav {
+    &__header {
+      &__top {
+        height: 50%;
+        text-align: end;
+        display: flex;
+        justify-content: end;
+        gap: 1rem;
+        font-size: 16px;
+      }
+      &__bottom {
+        height: 50%;
+        display: flex;
+        justify-content: space-around;
+        gap: 1rem;
+        font-size: 20px;
+      }
+    }
+    &__link {
+      &__top {
+        display: flex;
+        align-self: center;
+        gap: 0.5rem;
+      }
+    }
+    &__logo {
+      &__container {
+        align-self: center;
+        &__mobile {
+          display: none;
+        }
+      }
+    }
+    &__mobile {
+      display: none;
+    }
+    &__search {
+      &__input {
+        transition: transform 0.3s ease;
+        align-self: center;
+      }
+    }
+    &__span {
+      &__top {
+        align-content: center;
+      }
+    }
+    &__user {
+      &__menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 1rem;
+        width: 250px;
+        box-shadow: $shadow-1;
+        top: 8%;
+        right: 0;
+        position: absolute;
+        //background-color: $background-color-primary;
+        z-index: 99999999999999999999999999999999999999;
+        padding: 1rem 0;
+        min-height: min-content;
+        &__container {
+         // background-color: $background-color-primary;
+        }
+        &__content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          &__button {
+            display: flex;
+            align-self: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+          }
+        }
+        &__link {
+          text-align: start;
+          line-height: 30px;
+          li {
+            padding: 0 1rem;
+            width: 100%;
+            &:hover {
+              background: $background-color-tertiairy;
+              color: $navbar-link-color-black;
+            }
+          }
+        }
+        &__welcome {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.logo {
+  &__container {
+    &__mobile {
+      display: none;
+    }
+  }
+}
+
+.link {
+  &__button {
+    &__mobile {
+      &__container {
+        display: none;
+      }
+    }
+  }
+}
+
+.search-visible {
+  transform: translateX(-100%);
+  display: none;
+}
+
+/* ===================== Laptop ===================== */
+@include maxBigTablet__1199 {
+  nav {
+    .nav {
+      &__header {
+        &__top {
+          gap: 0.5rem;
+          font-size: 12px;
+        }
+        &__bottom {
+          gap: 0.5rem;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+/* ===================== Tablet ===================== */
+@include maxTablet__839 {
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo {
+    &__container {
+      &__mobile {
+        display: block;
+        padding: 0.5rem;
+        width: 20%;
+      }
+    }
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    top: -100%;
+    left: 0;
+    position: fixed;
+    background-color: $navbar-backgound-color-black-black;
+    //background-color: transparent;
+    box-shadow: $shadow-1;
+    width: 100%;
+    padding-block: 4.5rem 4rem;
+    transition: top 0.4s;
+    text-align: center;
+    .nav {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      &__header {
+        &__top {
+          display: none !important;
+        }
+      }
+      &__logo {
+        &__container {
+          display: none;
+          &__mobile {
+            display: block;
+          }
+        }
+      }
+      &__mobile {
+        display: block;
+      }
+      &__link {
+        display: flex;
+        flex-direction: column;
+        transition: color 0.4s;
+      }
+      &__search {
+        &__mobile {
+          &__container {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+
+  .link {
+    &__button {
+      &__mobile {
+        &__container {
+          display: flex;
+          padding: 0rem 1rem;
+          gap: 0.5rem;
+          width: 100%;
+        }
+        &__close {
+          position: absolute;
+          top: 1.3rem;
+          right: 1.4rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  #nav__actions__container {
+    display: flex !important;
+    width: 100%;
+    gap: 1rem;
+    align-items: center;
+    justify-content: end;
+  }
+
+  #nav__toggle {
+    cursor: pointer;
+  }
+
+  .show-menu {
+    top: 0 !important;
+  }
+}
+
+/* ===================== Tablet ===================== */
