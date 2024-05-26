@@ -7,7 +7,7 @@ function photographerTemplate(data) {
         const article = document.createElement( 'article' );
         // Lien
         const link = document.createElement('a');
-        link.setAttribute('href', `Mimi Keel`);
+        link.setAttribute('href', `./photographers.html`);
         // Image
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
