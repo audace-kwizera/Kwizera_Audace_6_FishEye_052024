@@ -32,6 +32,14 @@ h1 {
   height: 300px;
   margin: 0 100px; }
 
+.photographer-item {
+  display: block;
+  text-decoration: none; }
+
+a {
+  display: block;
+  text-decoration: none; }
+
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
 .contact_button {
@@ -49,7 +57,8 @@ h1 {
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
 .photographer_section article {
-  row-gap: 4px; }
+  row-gap: 4px;
+  text-align: center !important; }
   .photographer_section article h3 {
     font-size: 22px;
     font-weight: 100;
@@ -139,6 +148,11 @@ header {
     font-size: 36px;
     font-weight: 100;
     margin: 0 2.5rem; }
+
+.photograph-header {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
