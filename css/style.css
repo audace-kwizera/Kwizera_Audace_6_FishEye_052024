@@ -44,6 +44,14 @@ h1 {
   text-decoration: none;
 }
 
+.photographer-item {
+  display: block;
+  text-decoration: none; }
+
+a {
+  display: block;
+  text-decoration: none; }
+
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
 .contact_button {
@@ -170,6 +178,11 @@ header h1 {
   font-weight: 100;
   margin: 0 2.5rem;
 }
+
+.photograph-header {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
