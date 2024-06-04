@@ -1,0 +1,42 @@
+.photographer {
+  &__infos {
+      font-size: 64px;
+      color: $text__color__second;
+      &__container {
+        display: grid;
+        gap: 5px;    
+      }
+  }
+  &__city {
+      font-size: 24px;
+      color: $text__color__primary;
+  }
+  &__description {
+      font-size: 18px;
+      color: $text__color__five;
+  }
+  &__avatar {
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+}
+
+.photograph {
+  &-header {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+  .media {
+    width: 200px!important;
+    img {
+      width: 200px!important;
+      display: inline-block;
+    }
+  }
+

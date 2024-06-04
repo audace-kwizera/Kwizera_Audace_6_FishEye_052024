@@ -13,17 +13,20 @@
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <!-- Main -->
-    <!-- Main Header -->
     <main id="main">
+      <!-- Main Header -->
       <div class="photograph-header">
         <!-- Infos -->
-        <div class="photographer_infos"></div>
+        <div class="photographer_infos"><span id="photographerName"></span></div>
         <!-- Button -->
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <!-- Avatar -->
         <div class="photographer_avatar"></div>
       </div>
     </main>
+    <!-- Medias -->
+    <div id="mediaContainer"></div>
+    
     <div id="contact_modal">
 			<div class="modal">
 				<header>
@@ -45,9 +48,8 @@
 				</form>
 			</div>
 		</div>
-    <script src="scripts/utils/functions.js" ></script>
-    <script src="scripts/templates/profile.js" ></script>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="./scripts/utils/functions.js" ></script>
+    <script src="./scripts/pages/photographer.js"></script>
+    <script src="./scripts/utils/contactForm.js"></script>
   </body>
 </html>

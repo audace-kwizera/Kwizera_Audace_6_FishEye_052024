@@ -168,6 +168,28 @@ header {
   margin: 0;
   padding: 3.4rem 0; }
 
+.photographer__infos {
+  font-size: 64px;
+  color: #D3573C; }
+  .photographer__infos__container {
+    display: grid;
+    gap: 5px; }
+.photographer__city {
+  font-size: 24px;
+  color: #901C1C; }
+.photographer__description {
+  font-size: 18px;
+  color: #525252; }
+.photographer__avatar img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover; }
+
+.photograph-header {
+  display: flex;
+  justify-content: space-around; }
+
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
 
