@@ -39,6 +39,8 @@ function display(p) {
                     <div class="photographer__city">${p.city}</div>
                     <div class="photographer__description">${p.tagline}</div>
                 </div>
+                <!-- Middle Container -->
+                <div class="component__middle photographer__infos__middle__container"></div>
                 <!-- Right Container -->
                 <div class="component__right photographer__infos__right__container">
                     <div class="photographer__avatar"><img src="./assets/photographers/${p.portrait}"alt="avatar" /></div> 

@@ -338,8 +338,14 @@ header {
   .component__photographer__container .photographer {
     display: flex;
     justify-content: space-between; }
-.component__left, .component__right {
-  width: 30vw; }
+.component__left, .component__right, .component__middle {
+  width: 30%; }
+.component__left .photographer__avatar {
+  width: 100px;
+  height: 100px; }
+  .component__left .photographer__avatar img {
+    width: 100px;
+    height: 100px; }
 
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/

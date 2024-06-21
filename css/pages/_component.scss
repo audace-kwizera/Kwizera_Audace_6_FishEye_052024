@@ -68,7 +68,20 @@
     }
   }
   &__left,
-    &__right {
-      width: 30vw;
+    &__right,
+    &__middle {
+      width: 30%;
     }
+  &__left {
+    .photographer {
+      &__avatar {
+        width: 100px;
+        height: 100px;
+        img {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+  }
 }
