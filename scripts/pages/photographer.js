@@ -11,7 +11,7 @@ async function init() {
         return p.id === parseInt(id, 10);
     });
     console.log("photographer", photographer);
-    const medias = media.filter(function (m) {
+    medias = media.filter(function (m) {
         return m.photographerId === parseInt(id, 10);
     });
     console.log("medias", medias);
@@ -20,6 +20,7 @@ async function init() {
 
     display(photographer);
     displayMedias(medias);
+    setEventsListener();
 }
 
 function setPhotographerName(name) {
@@ -118,5 +119,25 @@ async function getPhotographers() {
     return await response.json();
 }
 
+function setEventsListener() {
+    const selectId = "select__order__by";
+    const selectElement = document.getElementById(selectId);
+    selectElement.addEventListener('change', function(e) {
+        e.preventDefault();
+        console.log('select', e.target.value);
+        const sortOf = e.target.value;
+        // 1. trier le tableau de médias
+        if (sortOf === 'title') {
+            medias.sort(function(a, b) {
+                return a.title.localeCompare(b.title);
+            });
+            console.log('result', medias);
+            // 2. réafficher les médias en fonction de ce nouveau trie
+            displayMedias(medias);
+        }
+        
+        
+    })
+}
 
 init();
