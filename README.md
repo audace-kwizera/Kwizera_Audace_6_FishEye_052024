@@ -24,3 +24,10 @@ afficher la video
 ajouter console log
 faire page suivante
 accesiibilite
+
+
+//////////////////////////////////////////////
+integrer pr avec fix css (carousel l'implementer dans le sass et le tri)
+remplacer onclick par add event listener
+retrier tableau js avec fonction sort (convertir string en nombre)
+function setn event listener 
