@@ -90,6 +90,27 @@ function showSlides() {
     });
 }
 
+function nextSlide() {
+    const slides = document.querySelectorAll(".carousel .media");
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlides();
+}
+
+function prevSlide() {
+    const slides = document.querySelectorAll(".carousel .media");
+    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+    showSlides();
+}
+
+function openCarousel(index) {
+    slideIndex = index;
+    document.getElementById("carouselContainer").style.display = "flex";
+    showSlides();
+}
+
+function closeCarousel() {
+    document.getElementById("carouselContainer").style.display = "none";
+}
 
 // Récupérer les photographes et les médias
 async function getPhotographers() {
