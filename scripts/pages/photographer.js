@@ -30,26 +30,6 @@ function setPhotographerName(name) {
 function display(p) {
     // Création du html
     const html = `
-        <div class="component__photographer__container photographer-container">
-            <div class="photographer infos">
-                <!-- Left Container -->
-                <div class="component__left photographer__infos__left__container">
-                    <div class="photographer__avatar"><img src="./assets/photographers/${p.portrait}"alt="avatar" /></div> 
-                    <div class="photographer__infos">${p.name}</div>
-                    <div class="photographer__city">${p.city}</div>
-                    <div class="photographer__description">${p.tagline}</div>
-                </div>
-                <!-- Right Container -->
-                <div class="component__right photographer__infos__right__container">
-                    <div class="photographer__avatar"><img src="./assets/photographers/${p.portrait}"alt="avatar" /></div> 
-                    <div class="photographer__infos">${p.name}</div>
-                    <div class="photographer__city">${p.city}</div>
-                    <div class="photographer__description">${p.tagline}</div>
-                    <div class="photographer__description">${p.price} €/jour</div>
-                </div>
-            </div>
-        </div>
-
         <div class="photograph-header">
             <!-- Infos -->
             <div class="photographer__infos__container">
