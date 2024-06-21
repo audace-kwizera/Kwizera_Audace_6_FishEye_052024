@@ -18,3 +18,9 @@ le faire en dur avec css
 *carousel (eventlistener)
 
 ajouter class via js pour la modal (classList)
+
+//////////////////////////////////////////////
+afficher la video
+ajouter console log
+faire page suivante
+accesiibilite

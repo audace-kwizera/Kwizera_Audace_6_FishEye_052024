@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
+let medias = [];
 
 let slideIndex = 0;
 
@@ -29,6 +30,26 @@ function setPhotographerName(name) {
 function display(p) {
     // Création du html
     const html = `
+        <div class="component__photographer__container photographer-container">
+            <div class="photographer infos">
+                <!-- Left Container -->
+                <div class="component__left photographer__infos__left__container">
+                    <div class="photographer__avatar"><img src="./assets/photographers/${p.portrait}"alt="avatar" /></div> 
+                    <div class="photographer__infos">${p.name}</div>
+                    <div class="photographer__city">${p.city}</div>
+                    <div class="photographer__description">${p.tagline}</div>
+                </div>
+                <!-- Right Container -->
+                <div class="component__right photographer__infos__right__container">
+                    <div class="photographer__avatar"><img src="./assets/photographers/${p.portrait}"alt="avatar" /></div> 
+                    <div class="photographer__infos">${p.name}</div>
+                    <div class="photographer__city">${p.city}</div>
+                    <div class="photographer__description">${p.tagline}</div>
+                    <div class="photographer__description">${p.price} €/jour</div>
+                </div>
+            </div>
+        </div>
+
         <div class="photograph-header">
             <!-- Infos -->
             <div class="photographer__infos__container">
@@ -69,9 +90,11 @@ function displayMedias(medias) {
         const mediaHtml = `
           <div class="media">
             <img src="./assets/medias/${media.image || media.video}" alt="${media.title}">
-            <div class="media-info">${media.title}</div>
-            <div class="media-likes">${media.likes} likes</div>
-            <div class="media-price">${media.price} €</div>
+            <div class="media-desciption">
+                <div class="media-info">${media.title}</div>
+                <div class="media-likes">${media.likes} likes</div>
+                <div class="media-price">${media.price} €</div>
+            </div>
           </div>
         `;
         carouselContainer.insertAdjacentHTML("beforeend", mediaHtml);
@@ -87,31 +110,12 @@ function showSlides() {
     });
 }
 
-function nextSlide() {
-    const slides = document.querySelectorAll(".carousel .media");
-    slideIndex = (slideIndex + 1) % slides.length;
-    showSlides();
-}
-
-function prevSlide() {
-    const slides = document.querySelectorAll(".carousel .media");
-    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-    showSlides();
-}
-
-function openCarousel(index) {
-    slideIndex = index;
-    document.getElementById("carouselContainer").style.display = "flex";
-    showSlides();
-}
-
-function closeCarousel() {
-    document.getElementById("carouselContainer").style.display = "none";
-}
 
 // Récupérer les photographes et les médias
 async function getPhotographers() {
     const response = await fetch("./data/photographers.json");
     return await response.json();
 }
+
+
 init();

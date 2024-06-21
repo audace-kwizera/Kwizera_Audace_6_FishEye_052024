@@ -1,9 +1,11 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+	modal.classList.add('opened');
+    document.body.classList.add('modal-opened');
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+    modal.classList.remove('opened');
+    document.body.classList.remove('modal-opened');
 }

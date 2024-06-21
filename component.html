@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!-- Modal & overlay -->
     <div id="overlay">
         <div id="contact_modal">
             <div class="modal">
@@ -35,42 +36,53 @@
     </div>
 
     <!-- Header / Banner -->
-    <header>
-        <img src="assets/images/logo.png" class="logo" />
-    </header>
+    <div class="component__header">
+        <!-- Navbar -->
+        <div class="component__header__navbar">
+            <input type="text" id="name" name="name" minlength="4" maxlength="20" size="10" placeholder="Prénom" class="component__input" />
+            <img src="assets/favicon.png" class="logo" />
+        </div>
+        <!-- Sous navigation -->
+        <div class="component__header__navbar__sub">
+            <!-- Likes -->
+            <div>12 Likes</div>
+            <!-- Order Filter -->
+            <select id="select__order__by" class="component__header__navbar__select">
+                <option value="popularity">Popularité</option>
+                <option value="date">Date</option>
+                <option value="title">Titre</option>
+            </select>
+            <!-- Button -->
+            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        </div>
+        <!-- Logo -->
+        <img src="assets/images/logo.png" class="component__header__navbar__logo logo" />
+    </div>
+    <!-- Section -->
+    <div class="component__section">
+        <div>Infos</div>
+        <div>photos</div>
+        <div>profil</div>
+        <div id="profileContainer"></div>
+    </div>
+    
     <!-- Main -->
     <main id="main">
         <!-- Main Header -->
         <div class="photograph-header">
             <!-- Infos -->
             <div class="photographer_infos"><span id="photographerName"></span></div>
-            <!-- Button -->
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
             <!-- Avatar -->
             <div class="photographer_avatar"></div>
         </div>
+        <!-- Conteneur pour les informations du photographe -->
+        <div id="displayPhotographer"></div>
     </main>
 
-    <!-- Select pour le tri -->
-    <label for="select__order__by">Trier par :</label>
-    <select id="select__order__by">
-        <option value="popularity">Popularité</option>
-        <option value="date">Date</option>
-        <option value="title">Titre</option>
-    </select>
-
-    <!-- Medias -->
-    <div id="mediaContainer"></div>
-
-    <div id="carouselContainer" class="carousel-container" style="display: none;">
-        <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
-        <div class="carousel" id="carousel"></div>
-        <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
-        <button class="carousel-button close" onclick="closeCarousel()">&#10006;</button>
-    </div>
     <script src="./scripts/utils/functions.js"></script>
     <script src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
+    <script src="./scripts/pages/component.js"></script>
 </body>
 
 </html>

@@ -40,6 +40,18 @@ a {
   display: block;
   text-decoration: none; }
 
+#overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: none; }
+
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
 .contact_button {
@@ -106,6 +118,12 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px; }
+
+body.modal-opened {
+  overflow: hidden; }
+
+body.modal-opened #overlay, body.modal-opened #contact_modal {
+  display: block; }
 
 #contact_modal {
   display: none; }
@@ -190,6 +208,22 @@ header {
   display: flex;
   justify-content: space-around; }
 
+#mediaContainer {
+  display: flex;
+  flex-flow: wrap;
+  gap: 2.5%;
+  justify-content: center; }
+
+.media {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%; }
+  .media img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover; }
+
 .carousel-container {
   position: fixed;
   top: 0;
@@ -207,7 +241,7 @@ header {
   transition: transform 0.5s ease-in-out; }
 
 .carousel .media {
-  min-width: 100%;
+  min-width: 100vw;
   box-sizing: border-box; }
 
 .carousel-button {
@@ -233,6 +267,79 @@ header {
   transform: none;
   background-color: rgba(255, 255, 255, 0.5);
   color: black; }
+
+#mediaContainer {
+  margin: 0 100px;
+  justify-content: space-between;
+  padding: 3rem 0; }
+  #mediaContainer .media {
+    width: 350px;
+    padding: 0.5rem 0; }
+    #mediaContainer .media img {
+      border-radius: 10px;
+      width: 350px;
+      height: 300px; }
+    #mediaContainer .media-description {
+      display: none; }
+
+.component__header {
+  flex-direction: column;
+  width: 100vw; }
+  .component__header__navbar {
+    display: flex;
+    justify-content: start;
+    width: 60vw;
+    margin: 0 100px;
+    padding: 1rem 0;
+    align-items: center; }
+    .component__header__navbar__sub {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 100px;
+      width: 60vw;
+      align-items: center;
+      padding: 1rem 0; }
+    .component__header__navbar__logo {
+      padding: 1rem 0; }
+    .component__header__navbar__select {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      padding: 11px;
+      width: 170px;
+      height: 70px;
+      border: none;
+      background-color: #901C1C;
+      border-radius: 5px;
+      cursor: pointer; }
+    .component__header__navbar input {
+      width: 40vw;
+      height: 2.5rem;
+      padding: 0 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #737373;
+      font-weight: 400; }
+  .component__header__input {
+    width: 40vw;
+    height: 2.5rem;
+    padding: 0 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #737373;
+    font-weight: 400; }
+.component__section {
+  display: flex;
+  margin: 0 100px;
+  justify-content: space-between;
+  padding: 2rem 0; }
+.component__photographer__container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 100px; }
+  .component__photographer__container .photographer {
+    display: flex;
+    justify-content: space-between; }
+.component__left, .component__right {
+  width: 30vw; }
 
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/

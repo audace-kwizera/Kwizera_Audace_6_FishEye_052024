@@ -29,4 +29,9 @@ form input {
     border-radius: 5px;
 }
 
-
+body.modal-opened {
+    overflow: hidden;
+  }
+  body.modal-opened #overlay, body.modal-opened #contact_modal {
+    display: block;
+  } 

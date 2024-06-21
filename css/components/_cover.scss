@@ -1,3 +1,17 @@
-@import '../utils/functions';
-@import '../utils/mixins';
-@import '../utils/variables';
+@import "../utils/functions";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+
+#mediaContainer .media {
+  width: 30%;
+}
+#mediaContainer .media img,
+#carousel .media img {
+  max-width: 100%;
+}
+#carousel .media img {
+  height: 90vh;
+  width: auto;
+  object-fit: contain;
+}

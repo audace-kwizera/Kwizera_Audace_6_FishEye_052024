@@ -1,0 +1,74 @@
+.component {
+  &__header {
+    flex-direction: column;
+    width: 100vw;
+    &__navbar {
+      display: flex;
+      justify-content: start;
+      width: 60vw;
+      margin: 0 100px;
+      padding: 1rem 0;
+      align-items: center;
+      &__sub {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 100px;
+        width: 60vw;
+        align-items: center;
+        padding: 1rem 0;
+      }
+      &__logo {
+        padding: 1rem 0;
+      }
+      &__select {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        padding: 11px;
+        width: 170px;
+        height: 70px;
+        border: none;
+        background-color: #901C1C;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input {
+        width: 40vw;
+        height: 2.5rem;
+        padding: 0 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #737373;
+        font-weight: 400;
+      }
+    }
+    &__input {
+      width: 40vw;
+      height: 2.5rem;
+      padding: 0 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #737373;
+      font-weight: 400;
+    }
+  }
+  &__section {
+      display: flex;
+      margin: 0 100px;
+      justify-content: space-between;
+      padding: 2rem 0;
+  }
+  &__photographer {
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 100px;
+      .photographer {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  &__left,
+    &__right {
+      width: 30vw;
+    }
+}
