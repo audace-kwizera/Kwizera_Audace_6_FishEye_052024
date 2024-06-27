@@ -1,10 +1,59 @@
 .photographer {
+  width: 100% !important;
+  padding: 0 0 4rem 0;
   &__infos {
-    font-size: 64px;
+    font-size: 45px;
     color: $text__color__second;
     &__container {
       display: grid;
       gap: 5px;
+      .photographer {
+        &__city {
+          font-size: 18px;
+        }
+        &__description {
+          font-size: 14px;
+        }
+      }
+    }
+    &__middle {
+      &__container {
+        background: #C4C4C4;
+        border-radius: 5px;
+        height: 300px;
+        width: 350px;
+      }
+    }
+    &__right {
+      &__container {
+        text-align: center;
+        .photographer {
+          &__infos {
+            font-size: 36px;
+          }
+          &__city {
+            font-size: 13px;
+          }
+          &__description {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+    &__left {
+      &__container {
+        .photographer {
+          &__infos {
+            font-size: 45px;
+          }
+          &__city {
+            font-size: 18px;
+          }
+          &__description {
+            font-size: 14px;
+          }
+        }
+      }
     }
   }
   &__city {

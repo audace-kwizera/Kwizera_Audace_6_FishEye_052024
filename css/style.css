@@ -186,23 +186,49 @@ header {
   margin: 0;
   padding: 3.4rem 0; }
 
-.photographer__infos {
-  font-size: 64px;
-  color: #D3573C; }
-  .photographer__infos__container {
-    display: grid;
-    gap: 5px; }
-.photographer__city {
-  font-size: 24px;
-  color: #901C1C; }
-.photographer__description {
-  font-size: 18px;
-  color: #525252; }
-.photographer__avatar img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover; }
+.photographer {
+  width: 100% !important;
+  padding: 0 0 4rem 0; }
+  .photographer__infos {
+    font-size: 45px;
+    color: #D3573C; }
+    .photographer__infos__container {
+      display: grid;
+      gap: 5px; }
+      .photographer__infos__container .photographer__city {
+        font-size: 18px; }
+      .photographer__infos__container .photographer__description {
+        font-size: 14px; }
+    .photographer__infos__middle__container {
+      background: #C4C4C4;
+      border-radius: 5px;
+      height: 300px;
+      width: 350px; }
+    .photographer__infos__right__container {
+      text-align: center; }
+      .photographer__infos__right__container .photographer__infos {
+        font-size: 36px; }
+      .photographer__infos__right__container .photographer__city {
+        font-size: 13px; }
+      .photographer__infos__right__container .photographer__description {
+        font-size: 10px; }
+    .photographer__infos__left__container .photographer__infos {
+      font-size: 45px; }
+    .photographer__infos__left__container .photographer__city {
+      font-size: 18px; }
+    .photographer__infos__left__container .photographer__description {
+      font-size: 14px; }
+  .photographer__city {
+    font-size: 24px;
+    color: #901C1C; }
+  .photographer__description {
+    font-size: 18px;
+    color: #525252; }
+  .photographer__avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover; }
 
 .photograph-header {
   display: flex;
@@ -306,7 +332,7 @@ header {
       align-items: center;
       padding: 1rem 0; }
     .component__header__navbar__logo {
-      padding: 1rem 0; }
+      padding: 3rem 0; }
     .component__header__navbar__select {
       font-size: 20px;
       font-weight: bold;

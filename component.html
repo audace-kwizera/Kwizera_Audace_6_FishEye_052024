@@ -16,7 +16,7 @@
             <div class="modal">
                 <header>
                     <h1>Contactez-moi</h1>
-                    <img src="assets/icons/close.svg" onclick="closeModal()" />
+                    <img src="assets/icons/close.svg" id="closemodal" />
                 </header>
                 <form>
                     <div>
@@ -53,18 +53,15 @@
                 <option value="title">Titre</option>
             </select>
             <!-- Button -->
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+            <button class="contact_button" id="openmodal">Contactez-moi</button>
         </div>
         <!-- Logo -->
         <img src="assets/images/logo.png" class="component__header__navbar__logo logo" />
     </div>
     <!-- Section -->
-    <div class="component__section">
-        <div>Infos</div>
-        <div>photos</div>
-        <div>profil</div>
+    <!-- <div class="component__section">
         <div id="profileContainer"></div>
-    </div>
+    </div> -->
     
     <!-- Main -->
     <main id="main">

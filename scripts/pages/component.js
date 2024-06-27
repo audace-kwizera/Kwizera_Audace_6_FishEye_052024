@@ -19,7 +19,8 @@ async function init() {
     // lancer la page
 
     display(photographer);
-    displayMedias(medias);
+    setEventsListener();
+    //displayMedias(medias);
 }
 
 function setPhotographerName(name) {
@@ -60,7 +61,7 @@ function display(p) {
               <div class="photographer__description">${p.tagline}</div>
             </div>
             <!-- Button -->
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+            <button class="contact_button" id="openmodal_second">Contactez-moi</button>
             <!-- Avatar -->
             <div class="photographer__avatar"><img src="./assets/photographers/${p.portrait}" alt="avatar" /></div>
         </div>
@@ -69,7 +70,7 @@ function display(p) {
     main.innerHTML = html;
 }
 
-function displayMedias(medias) {
+/* function displayMedias(medias) {
     const mediaContainer = document.getElementById("mediaContainer");
     mediaContainer.innerHTML = ""; 
 
@@ -110,7 +111,7 @@ function showSlides() {
     slides.forEach((slide, index) => {
         slide.style.transform = `translateX(${-slideIndex * 100}%)`;
     });
-}
+} */
 
 
 // Récupérer les photographes et les médias
@@ -118,6 +119,27 @@ async function getPhotographers() {
     const response = await fetch("./data/photographers.json");
     return await response.json();
 }
+
+function setEventsListener() { 
+    //Modal ouverture contact
+    let openmodal = document.getElementById("openmodal");
+    let openmodal_second = document.getElementById("openmodal_second");
+    openmodal.addEventListener("click", () => {
+        console.log('open');
+      displayModal()
+    });
+    openmodal_second.addEventListener("click", () => {
+        console.log('open');
+        displayModal()
+    })
+  
+    // Modal fermeture contact
+    let closemodal = document.getElementById("closemodal")
+    closemodal.addEventListener("click", () => {
+        console.log('close');
+        closeModal()
+    })
+  }
 
 
 init();
