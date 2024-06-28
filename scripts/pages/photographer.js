@@ -52,9 +52,9 @@ function displayMedias(medias) {
   const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
-  medias.forEach((media, index) => {
+  medias.forEach((media) => {
     const mediaHtml = `
-          <div class="media" onclick="openCarousel(${index})">
+          <div class="media">
             <img src="./assets/medias/${media.image || media.video}" alt="${
       media.title
     }">
@@ -123,10 +123,7 @@ async function getPhotographers() {
   return await response.json();
 }
 
-function setEventsListener() {
-  const selectId = "select__order__by";
-  const selectElement = document.getElementById(selectId);
-  selectElement.addEventListener("change", function (e) {
+function handleSelectChange (e) {
     e.preventDefault();
     console.log("select", e.target.value);
     const sortOf = e.target.value;
@@ -147,26 +144,76 @@ function setEventsListener() {
     console.log("result", medias);
     // 2. réafficher les médias en fonction de ce nouveau trie
     displayMedias(medias);
-  });
+    setEventsListener();
+  
+}
+
+function handleOpenModalClick(e) {
+    e.preventDefault();
+    displayModal();
+}
+
+function handleCloseModalClick(e) {
+  e.preventDefault();
+  closeModal();
+}
+
+function handlePrevSlide(e) {
+  e.preventDefault();
+  prevSlide();
+}
+
+function handleNextSlide(e) {
+  e.preventDefault();
+  nextSlide();  
+}
+
+function handleCloseSlide(e) {
+  e.preventDefault();
+  closeCarousel();
+}
+
+function handleClickMedias(e, index) {
+  e.preventDefault();
+  openCarousel(index);
+}
+
+function setEventsListener() {
+  const selectId = "select__order__by";
+  const selectElement = document.getElementById(selectId);
+  selectElement.removeEventListener('change', handleSelectChange);
+  selectElement.addEventListener("change", handleSelectChange);
 
   //Modal ouverture contact
-  let openmodal = document.getElementById("openmodal");
-  openmodal.addEventListener("click", () => {
-    console.log("open");
-    displayModal();
-  });
+  const openmodal = document.getElementById("openmodal");
+  openmodal.removeEventListener("click", handleOpenModalClick);
+  openmodal.addEventListener("click", handleOpenModalClick);
 
   // Modal fermeture contact
-  let closemodal = document.getElementById("closemodal");
-  closemodal.addEventListener("click", () => {
-    console.log("close");
-    closeModal();
+  const closemodal = document.getElementById("closemodal");
+
+  closemodal.removeEventListener("click", handleCloseModalClick);
+  closemodal.addEventListener("click", handleCloseModalClick);
+
+  const btnPrevSlide = document.getElementById('btn-prev-slide');
+  const btnNextSlide = document.getElementById('btn-next-slide');
+  const btnCloseSlide = document.getElementById('btn-close-slide');
+
+  btnPrevSlide.removeEventListener('click', handlePrevSlide);
+  btnNextSlide.removeEventListener('click', handleNextSlide);
+  btnCloseSlide.removeEventListener('click', handleCloseSlide);
+  
+  btnPrevSlide.addEventListener('click', handlePrevSlide);
+  btnNextSlide.addEventListener('click', handleNextSlide);
+  btnCloseSlide.addEventListener('click', handleCloseSlide);
+
+
+  const medias = document.querySelectorAll('#mediaContainer .media');
+  Array.from(medias).forEach((media, index) => {
+    media.removeEventListener('click', (e) => handleClickMedias(e, index));
+    media.addEventListener('click', (e) => handleClickMedias(e, index));
   });
 
-  let openCarousel = document.getElementById("openCarousel");
-  openCarousel.addEventListener("click", () => {
-    console.log("in");
-  });
 }
 
 init();
