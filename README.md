@@ -31,3 +31,9 @@ integrer pr avec fix css (carousel l'implementer dans le sass et le tri)
 remplacer onclick par add event listener
 retrier tableau js avec fonction sort (convertir string en nombre)
 function setn event listener 
+
+
+//////////////////////////////////////////////
+fixer typo (les sizes)
+utiliser le pattern factory pour generer le dom pour les medias (exemple je vais faire un mediafactory qui va afficher indiffereament video ou image il sert à creer des objet intelligent qui vont initialiser une logique sans avoir besoi de faire un if pour afficher l'image ou la video) ou fonction qui retourne un objet intelligent avec la mediafactory
+faire les likes si possible 

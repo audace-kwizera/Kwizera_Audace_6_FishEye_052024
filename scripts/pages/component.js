@@ -70,50 +70,6 @@ function display(p) {
     main.innerHTML = html;
 }
 
-/* function displayMedias(medias) {
-    const mediaContainer = document.getElementById("mediaContainer");
-    mediaContainer.innerHTML = ""; 
-
-    medias.forEach((media, index) => {
-        const mediaHtml = `
-          <div class="media" onclick="openCarousel(${index})">
-            <img src="./assets/medias/${media.image || media.video}" alt="${media.title}">
-            <div class="media-info">${media.title}</div>
-            <div class="media-likes">${media.likes} likes</div>
-            <div class="media-price">${media.price} €</div>
-          </div>
-        `;
-        mediaContainer.insertAdjacentHTML("beforeend", mediaHtml);
-    });
-
-    const carouselContainer = document.getElementById("carousel");
-    carouselContainer.innerHTML = ""; 
-
-    medias.forEach((media) => {
-        const mediaHtml = `
-          <div class="media">
-            <img src="./assets/medias/${media.image || media.video}" alt="${media.title}">
-            <div class="media-desciption">
-                <div class="media-info">${media.title}</div>
-                <div class="media-likes">${media.likes} likes</div>
-                <div class="media-price">${media.price} €</div>
-            </div>
-          </div>
-        `;
-        carouselContainer.insertAdjacentHTML("beforeend", mediaHtml);
-    });
-}
-
-function showSlides() {
-    const slides = document.querySelectorAll(".carousel .media");
-    if (slides.length === 0) return;
-
-    slides.forEach((slide, index) => {
-        slide.style.transform = `translateX(${-slideIndex * 100}%)`;
-    });
-} */
-
-
 // Récupérer les photographes et les médias
 async function getPhotographers() {
     const response = await fetch("./data/photographers.json");

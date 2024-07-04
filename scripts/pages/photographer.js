@@ -1,3 +1,60 @@
+// Classe pour créer des images
+class ImageElement {
+  constructor(src, alt, attributes = {}) {
+    this.src = src;
+    this.alt = alt;
+    this.attributes = attributes;
+  }
+
+  createElement() {
+    const img = document.createElement("img");
+    img.src = this.src;
+    img.alt = this.alt;
+    for (const [key, value] of Object.entries(this.attributes)) {
+      img.setAttribute(key, value);
+    }
+    return img;
+  }
+}
+
+// Classe pour créer des vidéos
+class VideoElement {
+  constructor(src, attributes = {}) {
+    this.src = src;
+    this.attributes = attributes;
+  }
+
+  createElement() {
+    const video = document.createElement("video");
+    video.src = this.src;
+    for (const [key, value] of Object.entries(this.attributes)) {
+      video.setAttribute(key, value);
+    }
+    // Ajout de controls pour les videos
+    video.controls = true;
+    video.autoplay = true;
+    video.muted = true;
+    return video;
+  }
+}
+
+// Factory pour créer des éléments medias
+class MediaFactory {
+  static createMedia(media) {
+    if (media.image) {
+      return new ImageElement(`./assets/medias/${media.image}`, media.title, {
+        class: "media-img",
+      }).createElement();
+    } else if (media.video) {
+      return new VideoElement(`./assets/medias/${media.video}`, {
+        class: "media-video",
+      }).createElement();
+    } else {
+      throw new Error("Unknown media type");
+    }
+  }
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 let medias = [];
@@ -52,37 +109,44 @@ function displayMedias(medias) {
   const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
-  medias.forEach((media, index) => {
-    const mediaHtml = `
-          <div class="media" onclick="openCarousel(${index})">
-            <img src="./assets/medias/${media.image || media.video}" alt="${
-      media.title
-    }">
+  medias.forEach((media) => {
+    // Creation des Medias à l'aide de Media Factory
+    const mediaElement = MediaFactory.createMedia(media);
+    const mediaHtml = document.createElement("div");
+    mediaHtml.className = "media";
+    mediaHtml.appendChild(mediaElement);
+
+    const mediaInfoHtml = `
             <div class="media-info">${media.title}</div>
             <div class="media-likes">${media.likes} likes</div>
             <div class="media-price">${media.price} €</div>
-          </div>
         `;
-    mediaContainer.insertAdjacentHTML("beforeend", mediaHtml);
+
+    mediaHtml.insertAdjacentHTML("beforeend", mediaInfoHtml);
+    // Ajout d'un gestionnaire d'événements pour ouvrir le carousel
+    mediaHtml.addEventListener("click", (e) => handleClickMedias(e, index));
+    mediaContainer.appendChild(mediaHtml);
   });
 
   const carouselContainer = document.getElementById("carousel");
   carouselContainer.innerHTML = "";
 
-  medias.forEach((media) => {
-    const mediaHtml = `
-          <div class="media">
-            <img src="./assets/medias/${media.image || media.video}" alt="${
-      media.title
-    }">
+  medias.forEach((media, index) => {
+    // Création d'éléments medias
+    const mediaElement = MediaFactory.createMedia(media);
+    const mediaHtml = document.createElement("div");
+    mediaHtml.className = "media";
+    mediaHtml.appendChild(mediaElement);
+
+    const mediaDescriptionHtml = `
             <div class="media-desciption">
                 <div class="media-info">${media.title}</div>
                 <div class="media-likes">${media.likes} likes</div>
                 <div class="media-price">${media.price} €</div>
             </div>
-          </div>
         `;
-    carouselContainer.insertAdjacentHTML("beforeend", mediaHtml);
+    mediaHtml.insertAdjacentHTML("beforeend", mediaDescriptionHtml);
+    carouselContainer.appendChild(mediaHtml);
   });
 }
 
@@ -123,49 +187,94 @@ async function getPhotographers() {
   return await response.json();
 }
 
+function handleSelectChange(e) {
+  e.preventDefault();
+  console.log("select", e.target.value);
+  const sortOf = e.target.value;
+  // 1. trier le tableau de médias
+  if (sortOf === "title") {
+    medias.sort(function (a, b) {
+      return a.title.localeCompare(b.title);
+    });
+  } else if (sortOf === "date") {
+    medias.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
+  } else if (sortOf === "likes") {
+    medias.sort(function (a, b) {
+      return b.likes - a.likes;
+    });
+  }
+  console.log("result", medias);
+  // 2. réafficher les médias en fonction de ce nouveau trie
+  displayMedias(medias);
+  setEventsListener();
+}
+
+//Modal ouverture contact
+function handleOpenModalClick(e) {
+  e.preventDefault();
+  displayModal();
+}
+
+function handleCloseModalClick(e) {
+  e.preventDefault();
+  closeModal();
+}
+
+function handlePrevSlide(e) {
+  e.preventDefault();
+  prevSlide();
+}
+
+function handleNextSlide(e) {
+  e.preventDefault();
+  nextSlide();
+}
+
+function handleCloseSlide(e) {
+  e.preventDefault();
+  closeCarousel();
+}
+
+function handleClickMedias(e, index) {
+  e.preventDefault();
+  openCarousel(index);
+}
+
 function setEventsListener() {
   const selectId = "select__order__by";
   const selectElement = document.getElementById(selectId);
-  selectElement.addEventListener("change", function (e) {
-    e.preventDefault();
-    console.log("select", e.target.value);
-    const sortOf = e.target.value;
-    // 1. trier le tableau de médias
-    if (sortOf === "title") {
-      medias.sort(function (a, b) {
-        return a.title.localeCompare(b.title);
-      });
-    } else if (sortOf === "date") {
-      medias.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
-      });
-    } else if (sortOf === "likes") {
-      medias.sort(function (a, b) {
-        return b.likes - a.likes;
-      });
-    }
-    console.log("result", medias);
-    // 2. réafficher les médias en fonction de ce nouveau trie
-    displayMedias(medias);
-  });
+  selectElement.removeEventListener("change", handleSelectChange);
+  selectElement.addEventListener("change", handleSelectChange);
 
   //Modal ouverture contact
-  let openmodal = document.getElementById("openmodal");
-  openmodal.addEventListener("click", () => {
-    console.log("open");
-    displayModal();
-  });
+  const openmodal = document.getElementById("openmodal");
+  openmodal.removeEventListener("click", handleOpenModalClick);
+  openmodal.addEventListener("click", handleOpenModalClick);
 
   // Modal fermeture contact
-  let closemodal = document.getElementById("closemodal");
-  closemodal.addEventListener("click", () => {
-    console.log("close");
-    closeModal();
-  });
+  const closemodal = document.getElementById("closemodal");
 
-  let openCarousel = document.getElementById("openCarousel");
-  openCarousel.addEventListener("click", () => {
-    console.log("in");
+  closemodal.removeEventListener("click", handleCloseModalClick);
+  closemodal.addEventListener("click", handleCloseModalClick);
+
+  const btnPrevSlide = document.getElementById("btn-prev-slide");
+  const btnNextSlide = document.getElementById("btn-next-slide");
+  const btnCloseSlide = document.getElementById("btn-close-slide");
+
+  btnPrevSlide.removeEventListener("click", handlePrevSlide);
+  btnNextSlide.removeEventListener("click", handleNextSlide);
+  btnCloseSlide.removeEventListener("click", handleCloseSlide);
+
+  btnPrevSlide.addEventListener("click", handlePrevSlide);
+  btnNextSlide.addEventListener("click", handleNextSlide);
+  btnCloseSlide.addEventListener("click", handleCloseSlide);
+
+  const medias = document.querySelectorAll("#mediaContainer .media");
+  Array.from(medias).forEach((media, index) => {
+    media.removeEventListener("click", (e) => handleClickMedias(e, index));
+    media.addEventListener("click", (e) => handleClickMedias(e, index));
   });
 }
 

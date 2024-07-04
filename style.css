@@ -270,14 +270,9 @@ header {
   box-sizing: border-box;
   display: block;
   width: 100%; }
-  .carousel .media img {
+  .carousel .media img, .carousel .media video {
     display: block;
     width: auto;
-    height: 75vh;
-    margin: 0 auto; }
-  .carousel .media video {
-    display: block;
-    width: 100vw;
     height: 75vh;
     margin: 0 auto; }
 
