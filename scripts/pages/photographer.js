@@ -118,6 +118,7 @@ function displayMedias(medias) {
 
     const mediaInfoHtml = `
             <div class="media-info">${media.title}</div>
+            <div class="like-button" data-index="${index}">Like</div>
             <div class="media-likes">${media.likes} likes</div>
             <div class="media-price">${media.price} €</div>
         `;
@@ -126,6 +127,9 @@ function displayMedias(medias) {
     // Ajout d'un gestionnaire d'événements pour ouvrir le carousel
     mediaHtml.addEventListener("click", (e) => handleClickMedias(e, index));
     mediaContainer.appendChild(mediaHtml);
+    // Ajout du like button
+    const likeButton = mediaContainer.querySelector(`.like-button[data-index="${index}"]`)
+    likeButton.addEventListener('click', (e) => handleLikeClick(e, index``))
   });
 
   const carouselContainer = document.getElementById("carousel");
@@ -240,6 +244,17 @@ function handleCloseSlide(e) {
 function handleClickMedias(e, index) {
   e.preventDefault();
   openCarousel(index);
+}
+
+function handleLikeClick(e, index) {
+  e.preventDefault();
+
+  // nombre de likes
+  medias[index].likes++;
+
+   // Mise à jour de l'affichage des likes
+   const likesElement = document.getElementById(`likes-${index}`);
+   likesElement.textContent = `${medias[index].likes} likes`;
 }
 
 function setEventsListener() {
