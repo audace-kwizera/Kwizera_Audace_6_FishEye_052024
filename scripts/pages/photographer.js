@@ -32,7 +32,7 @@ class VideoElement {
     }
     // Ajout de controls pour les videos
     video.controls = true;
-    video.autoplay = true;
+    video.autoplay = false;
     video.muted = true;
     return video;
   }
@@ -109,7 +109,7 @@ function displayMedias(medias) {
   const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
-  medias.forEach((media) => {
+  medias.forEach((media, index) => {
     // Creation des Medias à l'aide de Media Factory
     const mediaElement = MediaFactory.createMedia(media);
     const mediaHtml = document.createElement("div");

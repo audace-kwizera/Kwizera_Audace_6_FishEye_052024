@@ -16,9 +16,9 @@ function photographerTemplate(data) {
         img.setAttribute("alt", name);
         link.appendChild(img);
         // Titre
-        const h3 = document.createElement( 'h3' );
-        h3.textContent = name;
-        link.appendChild(h3);
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = name;
+        link.appendChild(h2);
         // Span
         const span = document.createElement( 'span' );
         span.textContent = city + ', ' + country;
