@@ -19,9 +19,10 @@
 async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
-  photographers.forEach((photographer) => {
+  photographers.forEach((photographer, index) => {
     const photographerModel = photographerTemplate(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
+    // pas top, mieux vaut mettre un element a plutôt que d'utiliser tabindex
+    const userCardDOM = photographerModel.getUserCardDOM(index + 1);
     photographersSection.appendChild(userCardDOM);
   });
 }
