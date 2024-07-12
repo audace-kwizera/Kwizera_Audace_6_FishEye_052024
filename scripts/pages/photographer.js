@@ -32,8 +32,8 @@ class VideoElement {
     }
     // Ajout de controls pour les videos
     video.controls = true;
-    video.autoplay = true;
-    video.muted = true;
+    video.autoplay = false;
+    video.muted = false;
     return video;
   }
 }
@@ -109,7 +109,7 @@ function displayMedias(medias) {
   const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
-  medias.forEach((media) => {
+  medias.forEach((media, index) => {
     // Creation des Medias à l'aide de Media Factory
     const mediaElement = MediaFactory.createMedia(media);
     const mediaHtml = document.createElement("div");
@@ -118,8 +118,11 @@ function displayMedias(medias) {
 
     const mediaInfoHtml = `
             <div class="media-info">${media.title}</div>
-            <div class="like-button" data-index="${index}">Like</div>
-            <div class="media-likes">${media.likes} likes</div>
+            <div class="like-container">
+              <div class="like-button" data-index="${index}">Like</div>
+              <div class="media-likes" id="likes-${index}">${media.likes} likes</div>
+            </div>
+            
             <div class="media-price">${media.price} €</div>
         `;
 
@@ -128,8 +131,10 @@ function displayMedias(medias) {
     mediaHtml.addEventListener("click", (e) => handleClickMedias(e, index));
     mediaContainer.appendChild(mediaHtml);
     // Ajout du like button
-    const likeButton = mediaContainer.querySelector(`.like-button[data-index="${index}"]`)
-    likeButton.addEventListener('click', (e) => handleLikeClick(e, index``))
+    const likeButton = mediaHtml.querySelector(
+      `.like-button[data-index="${index}"]`
+    );
+    likeButton.addEventListener("click", (e) => handleLikeClick(e, index));
   });
 
   const carouselContainer = document.getElementById("carousel");
@@ -143,7 +148,7 @@ function displayMedias(medias) {
     mediaHtml.appendChild(mediaElement);
 
     const mediaDescriptionHtml = `
-            <div class="media-desciption">
+            <div class="media-desciption" >
                 <div class="media-info">${media.title}</div>
                 <div class="media-likes">${media.likes} likes</div>
                 <div class="media-price">${media.price} €</div>
@@ -152,6 +157,22 @@ function displayMedias(medias) {
     mediaHtml.insertAdjacentHTML("beforeend", mediaDescriptionHtml);
     carouselContainer.appendChild(mediaHtml);
   });
+}
+
+function handleLikeClick(e, index) {
+  e.preventDefault();
+  // debug ouverture carousel
+  e.stopPropagation();
+
+  // nombre de likes
+  medias[index].likes++;
+
+  // Mise à jour des likes
+  const likesElement = document.getElementById(`likes-${index}`);
+  likesElement.textContent = `${medias[index].likes} likes`;
+
+  // Afficher le nombre de likes dans la console
+  console.log(`Nombre de likes pour le média ${index}: ${medias[index].likes}`);
 }
 
 function showSlides() {
@@ -244,17 +265,6 @@ function handleCloseSlide(e) {
 function handleClickMedias(e, index) {
   e.preventDefault();
   openCarousel(index);
-}
-
-function handleLikeClick(e, index) {
-  e.preventDefault();
-
-  // nombre de likes
-  medias[index].likes++;
-
-   // Mise à jour de l'affichage des likes
-   const likesElement = document.getElementById(`likes-${index}`);
-   likesElement.textContent = `${medias[index].likes} likes`;
 }
 
 function setEventsListener() {

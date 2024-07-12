@@ -37,3 +37,19 @@ function setn event listener
 fixer typo (les sizes)
 utiliser le pattern factory pour generer le dom pour les medias (exemple je vais faire un mediafactory qui va afficher indiffereament video ou image il sert à creer des objet intelligent qui vont initialiser une logique sans avoir besoi de faire un if pour afficher l'image ou la video) ou fonction qui retourne un objet intelligent avec la mediafactory
 faire les likes si possible 
+
+
+///
+achecker (test code js et dom)
+enlever autopklay
+console.log du modal
+to dolist
+
+- likes
+- styles
+- accessibilite nav clavier
+- add event listener qui ecoute touche de clavier
+- utiliser echap pour fermer modal 
+- utiliser les fleches pour naviguer dans le carousel avec eventlistener
+- tabindex pour naviguer entre element 
+- mettre attibut aria 
