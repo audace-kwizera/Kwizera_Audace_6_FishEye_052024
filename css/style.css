@@ -401,3 +401,7 @@ header {
 /*============================================== Text Color =============================================*/
 
 /*# sourceMappingURL=style.css.map */
+.like-button {
+  width: 21px;
+  height: 24px;
+}
