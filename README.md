@@ -53,3 +53,9 @@ to dolist
 - utiliser les fleches pour naviguer dans le carousel avec eventlistener
 - tabindex pour naviguer entre element 
 - mettre attibut aria 
+- lien sur le logo
+- z-index sur la video
+- endroit ou il y a tous les likes
+- mettre un bouton pour les likes pour les link images pour selectionner de facon natives et non via tabindex
+- donner focus prenom à l'ouverture de contact
+- essayer d'utiliiser le moins de tabindex

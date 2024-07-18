@@ -3,12 +3,13 @@ function photographerTemplate(data) {
 
     const picture = `assets/photographers/${portrait}`;
 
-    function getUserCardDOM() {
+    function getUserCardDOM(index) {
         const article = document.createElement( 'article' );
         // Lien
         const link = document.createElement('a');
         link.setAttribute('class', 'photographer-item');
         link.setAttribute('href', './photographer.html?id=' + id);
+        link.setAttribute('tabindex', "0");
         //link.setAttribute('href', `./photographers.html`);
         // Image
         const img = document.createElement( 'img' );

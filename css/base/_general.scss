@@ -23,6 +23,17 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    h2 {
+        font-size: 32px!important;
+        font-weight: 300!important;
+        margin: 0rem;
+    }
+    span {
+        font-size: 18px!important;
+    }
+    p {
+        font-size: 16px!important;
+    }
 }
 
 .photographer_section article h2 {

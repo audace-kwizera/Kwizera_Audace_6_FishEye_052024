@@ -47,7 +47,7 @@ class MediaFactory {
       }).createElement();
     } else if (media.video) {
       return new VideoElement(`./assets/medias/${media.video}`, {
-        class: "media-video",
+        class: "media-video"
       }).createElement();
     } else {
       throw new Error("Unknown media type");
@@ -105,7 +105,7 @@ function display(p) {
   main.innerHTML = html;
 }
 
-function displayMedias(medias) {
+function displayMedias(medias) {div
   const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
@@ -114,13 +114,17 @@ function displayMedias(medias) {
     const mediaElement = MediaFactory.createMedia(media);
     const mediaHtml = document.createElement("div");
     mediaHtml.className = "media";
+    const aElement = document.createElement('a');
+    aElement.setAttribute('href','#')
+    aElement.appendChild(mediaElement);
+    mediaHtml.appendChild(aElement);
     mediaHtml.appendChild(mediaElement);
 
     const mediaInfoHtml = `
             <div class="media-info">${media.title}</div>
             <div class="like-container">
               <div class="like-button" data-index="${index}">Like</div>
-              <div class="media-likes" id="likes-${index}">${media.likes} likes</div>
+              <div class="media-likes" id="likes-${index}">${media.likes} U+2665 </div>
             </div>
             
             <div class="media-price">${media.price} €</div>
@@ -150,7 +154,7 @@ function displayMedias(medias) {
     const mediaDescriptionHtml = `
             <div class="media-desciption" >
                 <div class="media-info">${media.title}</div>
-                <div class="media-likes">${media.likes} likes</div>
+                <div class="media-likes">${media.likes} U+2665</div>
                 <div class="media-price">${media.price} €</div>
             </div>
         `;
@@ -296,7 +300,7 @@ function setEventsListener() {
   btnNextSlide.addEventListener("click", handleNextSlide);
   btnCloseSlide.addEventListener("click", handleCloseSlide);
 
-  const medias = document.querySelectorAll("#mediaContainer .media");
+  const medias = document.querySelectorAll("#mediaContainer .media a");
   Array.from(medias).forEach((media, index) => {
     media.removeEventListener("click", (e) => handleClickMedias(e, index));
     media.addEventListener("click", (e) => handleClickMedias(e, index));
