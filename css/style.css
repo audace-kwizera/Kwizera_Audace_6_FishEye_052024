@@ -74,6 +74,10 @@ a {
   border-radius: 5px;
   cursor: pointer; }
 
+.like-button {
+  width: 21px;
+  height: 24px; }
+
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
 .photographer_section article {
@@ -111,7 +115,7 @@ form {
   align-items: flex-start; }
 
 form label {
-  color: #312E2E;
+  color: #312e2e;
   font-size: 36px; }
 
 form div {
@@ -130,8 +134,25 @@ form input {
 body.modal-opened {
   overflow: hidden; }
 
-body.modal-opened #overlay, body.modal-opened #contact_modal {
+body.modal-opened #overlay,
+body.modal-opened #contact_modal {
   display: block; }
+
+.like-container {
+  display: flex;
+  width: 20%;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: end;
+  align-items: top;
+  padding: 0.5rem 0; }
+.like-button {
+  width: 35px;
+  height: 35px; }
+
+.media-likes {
+  font-size: 30px;
+  color: #901C1C; }
 
 #contact_modal {
   display: none; }
@@ -158,6 +179,29 @@ body.modal-opened #overlay, body.modal-opened #contact_modal {
   font-size: 64px;
   font-weight: normal;
   text-align: center; }
+
+/*============================================== Background =============================================*/
+/*============================================== Text Color =============================================*/
+#mediaContainer .media {
+  width: 30%; }
+
+#mediaContainer .media img,
+#carousel .media img {
+  max-width: 100%; }
+
+#carousel .media img {
+  height: 90vh;
+  width: auto;
+  object-fit: contain; }
+
+.media-info {
+  width: 80%;
+  padding: 0.5rem 0.1rem 0.5rem 0;
+  color: #901C1C;
+  font-size: 30px; }
+  .media-info-container {
+    display: flex;
+    gap: 2rem; }
 
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/
@@ -356,7 +400,7 @@ header {
       width: 170px;
       height: 70px;
       border: none;
-      background-color: #901C1C;
+      background-color: #901c1c;
       border-radius: 5px;
       cursor: pointer; }
     .component__header__navbar input {
@@ -396,6 +440,17 @@ header {
 
 .select__label {
   margin: 0 100px; }
+
+#total-likes-container {
+  display: flex;
+  background-color: #db8876;
+  border-radius: 25px 25px 0 0;
+  font-size: 30px;
+  font-weight: 300;
+  width: 30%;
+  padding: 1rem;
+  justify-content: space-between;
+  float: inline-end; }
 
 /*============================================== Background =============================================*/
 /*============================================== Text Color =============================================*/

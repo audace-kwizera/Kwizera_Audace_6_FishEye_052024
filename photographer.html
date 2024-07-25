@@ -15,7 +15,8 @@
             <div class="modal">
                 <header>
                     <h1>Contactez-moi</h1>
-                    <img src="assets/icons/close.svg" id="closemodal" class="contact_modal" alt="fermer le formulaire de contact" />
+                    <img src="assets/icons/close.svg" id="closemodal" class="contact_modal"
+                        alt="fermer le formulaire de contact" />
                 </header>
                 <form>
                     <div>
@@ -28,7 +29,8 @@
                         <label for="message" required tabindex="0">Votre Message</label>
                         <textarea name="message" id="message" placeholder="Votre message" id="message"></textarea>
                     </div>
-                    <button class="contact_button" aria-haspopup="dialog" aria-controls="contact_modal" tabindex="0">Envoyer</button>
+                    <button class="contact_button" aria-haspopup="dialog" aria-controls="contact_modal"
+                        tabindex="0">Envoyer</button>
                 </form>
             </div>
         </div>
@@ -36,8 +38,8 @@
 
     <!-- Header / Banner -->
     <header>
-        <a href="./index.html" >
-            <img src="assets/images/logo.png" class="logo" alt="Fisheye"/>
+        <a href="./index.html">
+            <img src="assets/images/logo.png" class="logo" alt="Fisheye" />
         </a>
     </header>
     <!-- Main -->
@@ -55,7 +57,7 @@
 
     <!-- Select pour le tri -->
     <label for="select__order__by" class="select__label">Trier par :</label>
-    <select id="select__order__by"  class="select__option__container contact_button" tabindex="0">
+    <select id="select__order__by" class="select__option__container contact_button" tabindex="0">
         <option value="popularity">Popularité</option>
         <option value="date">Date</option>
         <option value="title">Titre</option>
@@ -64,13 +66,27 @@
     <!-- Medias -->
     <div id="mediaContainer" tabindex="0"></div>
 
-    <div id="carouselContainer" class="carousel-container" style="display: none;" role="dialog" aria-labelledby="carouselTitle" aria-hidden="true">
+    <div id="carouselContainer" class="carousel-container" style="display: none;" role="dialog"
+        aria-labelledby="carouselTitle" aria-hidden="true">
         <button class="carousel-button prev" id="btn-prev-slide">&#10094;</button>
         <div class="carousel" id="carousel" aria-label="Image précédente" tabindex="0"></div>
-        <button class="carousel-button next" id="btn-next-slide" aria-label="Image suivante" tabindex="0">&#10095;</button>
-        <button class="carousel-button close" id="btn-close-slide" aria-label="Fermer le carrousel" tabindex="0">&#10006;</button>
+        <button class="carousel-button next" id="btn-next-slide" aria-label="Image suivante"
+            tabindex="0">&#10095;</button>
+        <button class="carousel-button close" id="btn-close-slide" aria-label="Fermer le carrousel"
+            tabindex="0">&#10006;</button>
     </div>
+
+    <!-- Total Likes & Price -->
+    <div id="total-likes-container">
+        <div class="total-likes-container">
+            <span>Total des likes : </span><span id="total-likes"></span> ♥
+        </div>
+        <div class="price-container"><span id="price-per-day"></span><span> / jour</span></div>
+    </div>
+
+
     <script src="./scripts/utils/functions.js"></script>
+    <script src="scripts/templates/profile.js"></script>
     <script src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
 </body>

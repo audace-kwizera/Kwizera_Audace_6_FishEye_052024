@@ -2,7 +2,6 @@
 @import "../utils/mixins";
 @import "../utils/variables";
 
-
 #mediaContainer .media {
   width: 30%;
 }
@@ -15,3 +14,16 @@
   width: auto;
   object-fit: contain;
 }
+
+.media-info {
+  width: 80%;
+  padding: 0.5rem 0.1rem 0.5rem 0;
+  color: #901C1C;
+  font-size: 30px;
+  &-container {
+    display: flex;
+    gap: 2rem;
+  }
+}
+
+

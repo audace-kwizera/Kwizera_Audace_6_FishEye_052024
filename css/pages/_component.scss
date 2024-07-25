@@ -28,7 +28,7 @@
         width: 170px;
         height: 70px;
         border: none;
-        background-color: #901C1C;
+        background-color: #901c1c;
         border-radius: 5px;
         cursor: pointer;
       }
@@ -51,10 +51,10 @@
     }
   }
   &__section {
-      display: flex;
-      margin: 0 100px;
-      justify-content: space-between;
-      padding: 2rem 0;
+    display: flex;
+    margin: 0 100px;
+    justify-content: space-between;
+    padding: 2rem 0;
   }
   &__photographer {
     &__container {
@@ -68,10 +68,10 @@
     }
   }
   &__left,
-    &__right,
-    &__middle {
-      width: 30%;
-    }
+  &__right,
+  &__middle {
+    width: 30%;
+  }
   &__left {
     .photographer {
       &__avatar {
@@ -90,4 +90,16 @@
   &__label {
     margin: 0 100px;
   }
+}
+
+#total-likes-container {
+  display: flex;
+  background-color: #db8876;
+  border-radius: 25px 25px 0 0;
+  font-size: 30px;
+  font-weight: 300;
+  width: 30%;
+  padding: 1rem;
+  justify-content: space-between;
+  float: inline-end;
 }

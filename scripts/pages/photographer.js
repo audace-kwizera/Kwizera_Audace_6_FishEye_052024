@@ -16,6 +16,8 @@ class ImageElement {
     return img;
   }
 }
+// array of medias liked populate with media.id
+const liked = [];
 
 // Classe pour créer des vidéos
 class VideoElement {
@@ -47,10 +49,10 @@ class MediaFactory {
       }).createElement();
     } else if (media.video) {
       return new VideoElement(`./assets/medias/${media.video}`, {
-        class: "media-video"
+        class: "media-video",
       }).createElement();
     } else {
-      throw new Error("Unknown media type");
+      throw new Error("Format inconnu");
     }
   }
 }
@@ -80,6 +82,9 @@ async function init() {
   setEventsListener();
 }
 
+// Mise à jour du total des likes après l'initialisation
+updateTotalLikes();
+
 function setPhotographerName(name) {
   const pn = document.getElementById("photographerName");
   pn.textContent = name;
@@ -105,7 +110,7 @@ function display(p) {
   main.innerHTML = html;
 }
 
-function displayMedias(medias) {div
+function displayMedias(medias) {
   const mediaContainer = document.getElementById("mediaContainer");
   mediaContainer.innerHTML = "";
 
@@ -114,31 +119,25 @@ function displayMedias(medias) {div
     const mediaElement = MediaFactory.createMedia(media);
     const mediaHtml = document.createElement("div");
     mediaHtml.className = "media";
-    const aElement = document.createElement('a');
-    aElement.setAttribute('href','#')
+    const aElement = document.createElement("a");
+    aElement.setAttribute("href", "#");
     aElement.appendChild(mediaElement);
     mediaHtml.appendChild(aElement);
     mediaHtml.appendChild(mediaElement);
 
     const mediaInfoHtml = `
-            <div class="media-info">${media.title}</div>
-            <div class="like-container">
-              <div class="like-button" data-index="${index}">Like</div>
-              <div class="media-likes" id="likes-${index}">${media.likes} U+2665 </div>
+            <div class="media-info-container">
+              <div class="media-info">${media.title}</div>
+              <form class="like-container" id="${media.id}">
+                <label class="media-likes" for="input-likes-${index}" id="label-likes-${index}">${media.likes}</label>
+                <input class="like-button" data-index="${index}" type="image" src="./assets/icons/like-red.png" id="input-likes-${index}"/>
+              </form>
             </div>
-            
-            <div class="media-price">${media.price} €</div>
         `;
 
+    /*   <div class="media-price">${media.price} €</div> */
     mediaHtml.insertAdjacentHTML("beforeend", mediaInfoHtml);
-    // Ajout d'un gestionnaire d'événements pour ouvrir le carousel
-    mediaHtml.addEventListener("click", (e) => handleClickMedias(e, index));
     mediaContainer.appendChild(mediaHtml);
-    // Ajout du like button
-    const likeButton = mediaHtml.querySelector(
-      `.like-button[data-index="${index}"]`
-    );
-    likeButton.addEventListener("click", (e) => handleLikeClick(e, index));
   });
 
   const carouselContainer = document.getElementById("carousel");
@@ -161,6 +160,9 @@ function displayMedias(medias) {div
     mediaHtml.insertAdjacentHTML("beforeend", mediaDescriptionHtml);
     carouselContainer.appendChild(mediaHtml);
   });
+
+  // Mise à jour du total des likes
+  updateTotalLikes();
 }
 
 function handleLikeClick(e, index) {
@@ -168,15 +170,28 @@ function handleLikeClick(e, index) {
   // debug ouverture carousel
   e.stopPropagation();
 
+  const myForm = e.target;
+  const id = myForm.id;
+
   // nombre de likes
-  medias[index].likes++;
+  if (liked.includes(id)) {
+    medias[index].likes--;
+    const i = liked.findIndex((el) => el === id);
+    liked.splice(i, 1);
+  } else {
+    medias[index].likes++;
+    liked.push(id);
+  }
 
   // Mise à jour des likes
-  const likesElement = document.getElementById(`likes-${index}`);
-  likesElement.textContent = `${medias[index].likes} likes`;
+  const likesElement = document.getElementById(`label-likes-${index}`);
+  likesElement.textContent = `${medias[index].likes}`;
 
   // Afficher le nombre de likes dans la console
   console.log(`Nombre de likes pour le média ${index}: ${medias[index].likes}`);
+
+  // Mise à jour du total des likes après chaque interaction
+  updateTotalLikes();
 }
 
 function showSlides() {
@@ -208,6 +223,12 @@ function openCarousel(index) {
 
 function closeCarousel() {
   document.getElementById("carouselContainer").style.display = "none";
+}
+
+// Calcul et affichage du total des likes
+function updateTotalLikes() {
+  const totalLikes = medias.reduce((sum, media) => sum + media.likes, 0);
+  document.getElementById("total-likes").textContent = totalLikes;
 }
 
 // Récupérer les photographes et les médias
@@ -304,6 +325,12 @@ function setEventsListener() {
   Array.from(medias).forEach((media, index) => {
     media.removeEventListener("click", (e) => handleClickMedias(e, index));
     media.addEventListener("click", (e) => handleClickMedias(e, index));
+  });
+  const formLikes = document.querySelectorAll("form.like-container");
+  Array.from(formLikes).forEach((form, index) => {
+    form.addEventListener("submit", (e) => {
+      handleLikeClick(e, index);
+    });
   });
 }
 

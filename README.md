@@ -59,3 +59,5 @@ to dolist
 - mettre un bouton pour les likes pour les link images pour selectionner de facon natives et non via tabindex
 - donner focus prenom à l'ouverture de contact
 - essayer d'utiliiser le moins de tabindex
+- like incremente si liké et decrementer si pas liké et total des likes en utilisant input type image en faisant un formulaire, le nombre de like label
+- inpu
