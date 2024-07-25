@@ -70,6 +70,8 @@ async function init() {
     return p.id === parseInt(id, 10);
   });
   console.log("photographer", photographer);
+  const priceDom = document.getElementById("price-per-day");
+  priceDom.textContent = photographer.price.toString();
   medias = media.filter(function (m) {
     return m.photographerId === parseInt(id, 10);
   });
@@ -123,7 +125,6 @@ function displayMedias(medias) {
     aElement.setAttribute("href", "#");
     aElement.appendChild(mediaElement);
     mediaHtml.appendChild(aElement);
-    mediaHtml.appendChild(mediaElement);
 
     const mediaInfoHtml = `
             <div class="media-info-container">
