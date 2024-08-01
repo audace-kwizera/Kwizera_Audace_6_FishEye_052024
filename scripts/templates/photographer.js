@@ -19,7 +19,7 @@ function photographerTemplate(data) {
         // Titre
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
-        link.appendChild(h2);
+       // link.appendChild(h2);
         // Span
         const span = document.createElement( 'span' );
         span.textContent = city + ', ' + country;
@@ -34,7 +34,7 @@ function photographerTemplate(data) {
         pPrice.classList.add('price');
         
         article.appendChild(link);
-        article.appendChild(link);
+        //article.appendChild(link);
         article.appendChild(span);
         article.appendChild(pTag);
         article.appendChild(pPrice);

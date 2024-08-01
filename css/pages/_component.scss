@@ -102,4 +102,17 @@
   padding: 1rem;
   justify-content: space-between;
   float: inline-end;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+}
+
+textarea {
+  width: 100%;
+}
+
+.contact-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }

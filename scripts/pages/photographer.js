@@ -70,6 +70,8 @@ async function init() {
     return p.id === parseInt(id, 10);
   });
   console.log("photographer", photographer);
+  const priceDom = document.getElementById("price-per-day");
+  priceDom.textContent = photographer.price.toString();
   medias = media.filter(function (m) {
     return m.photographerId === parseInt(id, 10);
   });
@@ -123,7 +125,6 @@ function displayMedias(medias) {
     aElement.setAttribute("href", "#");
     aElement.appendChild(mediaElement);
     mediaHtml.appendChild(aElement);
-    mediaHtml.appendChild(mediaElement);
 
     const mediaInfoHtml = `
             <div class="media-info-container">
@@ -332,6 +333,17 @@ function setEventsListener() {
       handleLikeClick(e, index);
     });
   });
+  const formContact = document.getElementById('contact-form');
+  formContact.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(formContact);
+    // Affichage des datas via le nom 
+    console.log("Prénom", formData.get("firstName")); 
+    console.log("Nom", formData.get("lastName")); 
+    console.log("Email", formData.get("email")); 
+    console.log("Message", formData.get("message")); 
+    closemodal();
+  })
 }
 
 init();

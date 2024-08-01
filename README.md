@@ -61,3 +61,7 @@ to dolist
 - essayer d'utiliiser le moins de tabindex
 - like incremente si liké et decrementer si pas liké et total des likes en utilisant input type image en faisant un formulaire, le nombre de like label
 - inpu
+
+-----------------------------------------------
+
+- capturer données du form via clg (recup form et attacher eventlistener)
