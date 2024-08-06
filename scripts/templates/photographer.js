@@ -35,6 +35,7 @@ function photographerTemplate(data) {
         
         article.appendChild(link);
         //article.appendChild(link);
+        article.appendChild(h2)
         article.appendChild(span);
         article.appendChild(pTag);
         article.appendChild(pPrice);

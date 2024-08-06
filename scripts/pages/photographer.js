@@ -21,14 +21,16 @@ const liked = [];
 
 // Classe pour créer des vidéos
 class VideoElement {
-  constructor(src, attributes = {}) {
+  constructor(src, alt, attributes = {}) {
     this.src = src;
+    this.alt = alt;
     this.attributes = attributes;
   }
 
   createElement() {
     const video = document.createElement("video");
     video.src = this.src;
+    video.setAttribute("alt", this.alt);
     for (const [key, value] of Object.entries(this.attributes)) {
       video.setAttribute(key, value);
     }
@@ -48,7 +50,7 @@ class MediaFactory {
         class: "media-img",
       }).createElement();
     } else if (media.video) {
-      return new VideoElement(`./assets/medias/${media.video}`, {
+      return new VideoElement(`./assets/medias/${media.video}`, media.title, {
         class: "media-video",
       }).createElement();
     } else {
@@ -62,6 +64,8 @@ const id = urlParams.get("id");
 let medias = [];
 
 let slideIndex = 0;
+
+let isModalOpen = false;
 
 async function init() {
   const { photographers, media } = await getPhotographers();
@@ -122,7 +126,25 @@ function displayMedias(medias) {
     const mediaHtml = document.createElement("div");
     mediaHtml.className = "media";
     const aElement = document.createElement("a");
-    aElement.setAttribute("href", "#");
+    //aElement.setAttribute("href", "#");
+    aElement.setAttribute("tabindex", "0");
+    aElement.appendChild(mediaElement);
+    mediaHtml.appendChild(aElement);
+
+    // Ajout de l'événement click pour le carousel
+    aElement.addEventListener("click", (e) => {
+      e.preventDefault();
+      openCarousel(index); // Ouvrir le carrousel avec l'index approprié
+    });
+
+    // Ajout de l'événement keydown pour la touche "Entrée"
+    aElement.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        openCarousel(index); 
+      }
+    });
+
     aElement.appendChild(mediaElement);
     mediaHtml.appendChild(aElement);
 
@@ -131,7 +153,7 @@ function displayMedias(medias) {
               <div class="media-info">${media.title}</div>
               <form class="like-container" id="${media.id}">
                 <label class="media-likes" for="input-likes-${index}" id="label-likes-${index}">${media.likes}</label>
-                <input class="like-button" data-index="${index}" type="image" src="./assets/icons/like-red.png" id="input-likes-${index}"/>
+                <input class="like-button" data-index="${index}" type="image" src="./assets/icons/like-red.png" id="input-likes-${index}" alt="like" />
               </form>
             </div>
         `;
@@ -153,9 +175,9 @@ function displayMedias(medias) {
 
     const mediaDescriptionHtml = `
             <div class="media-desciption" >
-                <div class="media-info">${media.title}</div>
-                <div class="media-likes">${media.likes} U+2665</div>
-                <div class="media-price">${media.price} €</div>
+                <div class="media-info"></div>
+                <div class="media-likes"></div>
+                <div class="media-price"></div>
             </div>
         `;
     mediaHtml.insertAdjacentHTML("beforeend", mediaDescriptionHtml);
@@ -164,6 +186,40 @@ function displayMedias(medias) {
 
   // Mise à jour du total des likes
   updateTotalLikes();
+}
+
+// Gestion de la navigation au clavier
+function handleKeyDown(event) {
+  const mediaElements = document.querySelectorAll("#mediaContainer .media a");
+  const mediaCount = mediaElements.length;
+
+  // Verification Présence a des médias
+  if (mediaCount === 0) return;
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    // Trouver l'index de l'élément actif
+    const activeIndex = Array.from(mediaElements).findIndex(
+      (el) => el === document.activeElement
+    );
+    // Element suivant
+    const nextIndex = (activeIndex + 1) % mediaCount;
+    mediaElements[nextIndex].focus();
+  } else if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    // Trouver l'index de l'élément actif
+    const activeIndex = Array.from(mediaElements).findIndex(
+      (el) => el === document.activeElement
+    );
+    // Element precedent
+    const prevIndex = (activeIndex - 1 + mediaCount) % mediaCount;
+    mediaElements[prevIndex].focus();
+  }
+
+  // Si modal est ouverture fermeture via echap
+  if (isModalOpen && event.key === "Escape") {
+    closeModal();
+  }
 }
 
 function handleLikeClick(e, index) {
@@ -216,14 +272,35 @@ function prevSlide() {
   showSlides();
 }
 
+// Fonction pour gérer les événements de touche
+function handleKeydown(e) {
+  switch (e.key) {
+    case "ArrowLeft":
+      prevSlide();
+      break;
+    case "ArrowRight":
+      nextSlide();
+      break;
+    case "Escape":
+      closeCarousel();
+      break;
+  }
+}
+
 function openCarousel(index) {
   slideIndex = index;
   document.getElementById("carouselContainer").style.display = "flex";
   showSlides();
+
+  // Ajouter les écouteurs d'événements au clavier lors de l'ouverture du carousel
+  document.addEventListener("keydown", handleKeydown);
 }
 
 function closeCarousel() {
   document.getElementById("carouselContainer").style.display = "none";
+
+  // Retirer les écouteurs d'événements au clavier lors de la fermeture du carousel
+  document.removeEventListener("keydown", handleKeydown);
 }
 
 // Calcul et affichage du total des likes
@@ -266,11 +343,18 @@ function handleSelectChange(e) {
 function handleOpenModalClick(e) {
   e.preventDefault();
   displayModal();
+  isModalOpen = true;
 }
 
 function handleCloseModalClick(e) {
   e.preventDefault();
   closeModal();
+}
+
+function closeModal() {
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  isModalOpen = false;
 }
 
 function handlePrevSlide(e) {
@@ -326,6 +410,14 @@ function setEventsListener() {
   Array.from(medias).forEach((media, index) => {
     media.removeEventListener("click", (e) => handleClickMedias(e, index));
     media.addEventListener("click", (e) => handleClickMedias(e, index));
+
+    media.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                // Ouvrir le carrousel avec l'index approprié lorsque "Entrée" est pressée
+                openCarousel(index);  
+            }
+        });
   });
   const formLikes = document.querySelectorAll("form.like-container");
   Array.from(formLikes).forEach((form, index) => {
@@ -333,17 +425,20 @@ function setEventsListener() {
       handleLikeClick(e, index);
     });
   });
-  const formContact = document.getElementById('contact-form');
-  formContact.addEventListener('submit', (e) => {
+  const formContact = document.getElementById("contact-form");
+  formContact.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(formContact);
-    // Affichage des datas via le nom 
-    console.log("Prénom", formData.get("firstName")); 
-    console.log("Nom", formData.get("lastName")); 
-    console.log("Email", formData.get("email")); 
-    console.log("Message", formData.get("message")); 
-    closemodal();
-  })
+    // Affichage des datas via le nom
+    console.log("Prénom", formData.get("firstName"));
+    console.log("Nom", formData.get("lastName"));
+    console.log("Email", formData.get("email"));
+    console.log("Message", formData.get("message"));
+    closeModal();
+  });
+
+  // Evénements pour la navigation au clavier
+  document.addEventListener("keydown", handleKeyDown);
 }
 
 init();

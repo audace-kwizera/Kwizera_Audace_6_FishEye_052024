@@ -82,8 +82,8 @@
 }
 
 #mediaContainer {
-  display: flex;
-  flex-flow: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2.5%;
   justify-content: center;
 }
@@ -169,7 +169,10 @@
 }
 
 #mediaContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0fr;
   margin: 0 100px;
+  align-items: end;
   justify-content: space-between;
   padding: 3rem 0;
   .media {
