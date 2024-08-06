@@ -25,6 +25,8 @@ class VideoElement {
     this.src = src;
     this.alt = alt;
     this.attributes = attributes;
+    // Ajout de la source du poster
+    this.posterSrc = this.posterSrc;
   }
 
   createElement() {
@@ -34,10 +36,18 @@ class VideoElement {
     for (const [key, value] of Object.entries(this.attributes)) {
       video.setAttribute(key, value);
     }
+    if (this.posterSrc) {
+      video.setAttribute("poster", this.posterSrc); 
+    }
+    // Définir l'image de couverture
     // Ajout de controls pour les videos
     video.controls = true;
     video.autoplay = false;
     video.muted = false;
+    // Ajouter un tabindex pour rendre l'élément focusable
+    video.tabIndex = 0;
+    // Assurer que la vidéo prend toute la largeur de la carte
+    video.style.width = '100%';
     return video;
   }
 }
@@ -141,7 +151,7 @@ function displayMedias(medias) {
     aElement.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        openCarousel(index); 
+        openCarousel(index);
       }
     });
 
@@ -257,6 +267,18 @@ function showSlides() {
 
   slides.forEach((slide, index) => {
     slide.style.transform = `translateX(${-slideIndex * 100}%)`;
+
+    // Lecture des vidéos dans le carousel
+    const video = slide.querySelector("video");
+    if (video) {
+      if (index === slideIndex) {
+        video.play();
+      } else {
+        video.pause();
+        // Remettre à zéro le temps de la vidéo
+        video.currentTime = 0;
+      }
+    }
   });
 }
 
@@ -412,12 +434,12 @@ function setEventsListener() {
     media.addEventListener("click", (e) => handleClickMedias(e, index));
 
     media.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                // Ouvrir le carrousel avec l'index approprié lorsque "Entrée" est pressée
-                openCarousel(index);  
-            }
-        });
+      if (e.key === "Enter") {
+        e.preventDefault();
+        // Ouvrir le carrousel avec l'index approprié lorsque "Entrée" est pressée
+        openCarousel(index);
+      }
+    });
   });
   const formLikes = document.querySelectorAll("form.like-container");
   Array.from(formLikes).forEach((form, index) => {
@@ -439,6 +461,24 @@ function setEventsListener() {
 
   // Evénements pour la navigation au clavier
   document.addEventListener("keydown", handleKeyDown);
+
+  // Evenement pour la lecture des vidéos dans le carrousel au clavier
+  const carouselMedias = document.querySelectorAll(".carousel .media");
+  Array.from(carouselMedias).forEach((media) => {
+    media.addEventListener("keydown", (e) => {
+      if (
+        (e.key === "Enter" || e.key === " ") &&
+        media.querySelector("video")
+      ) {
+        const video = media.querySelector("video");
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    });
+  });
 }
 
 init();
